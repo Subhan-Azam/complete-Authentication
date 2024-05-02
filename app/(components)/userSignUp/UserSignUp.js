@@ -93,7 +93,7 @@ export default function UserSignUp() {
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
                 className="outline-none w-full"
-                type={visiblePass ? "text" : "password"}
+                type={visiblePass ? "password" : "text"}
                 placeholder="Password"
               />
               <div
@@ -101,15 +101,14 @@ export default function UserSignUp() {
                 onClick={() => setVisiblePass(!visiblePass)}
               >
                 {visiblePass ? (
-                  <FontAwesomeIcon className="text-sm px-2" icon={faEye} />
-                ) : (
                   <FontAwesomeIcon className="text-sm px-2" icon={faEyeSlash} />
+                ) : (
+                  <FontAwesomeIcon className="text-sm px-2" icon={faEye} />
                 )}
               </div>
             </div>
             <button
               onClick={signUpHandler}
-              // type="submit"
               className="py-2 text-lg font-semibold rounded-lg bg-green-500"
             >
               SignUp

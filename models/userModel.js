@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -15,18 +14,25 @@ const userSchema = new mongoose.Schema({
     type: String,
     require: [true, "Please provide password"],
   },
-//   isVerified: {
-//     type: Boolean,
-//     default: false,
-//   },
-//   isAdmin: {
-//     type: Boolean,
-//     default: false,
-//   },
-//   forgetPasswordToken: String,
-//   forgetPasswordTokenExpiry: Date,
-//   verifyToken: String,
-//   verifyTokenExpiry: Date,
+  reset_token: {
+    type: String,
+  },
+  reset_token_expiration: {
+    type: Date,
+  },
+  // isVerified: {
+  //   type: Boolean,
+  //   default: false,
+  // },
+  // isAdmin: {
+  //   type: Boolean,
+  //   default: false,
+  // },
+  // forgetPasswordToken: String,
+  // forgetPasswordTokenExpiry: Date,
+  // verifyToken: String,
+  // verifyTokenExpiry: Date,
 });
 
-export default mongoose.models.userAuth || mongoose.model("userAuth", userSchema)
+export default mongoose.models.userAuth ||
+  mongoose.model("userAuth", userSchema);
