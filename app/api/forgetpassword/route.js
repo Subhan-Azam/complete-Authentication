@@ -6,9 +6,9 @@ import moment from "moment";
 import bcrypt from "bcryptjs";
 import nodemailer from "nodemailer";
 
+dbConfig();
 export const POST = async (req) => {
   try {
-    dbConfig();
     const body = await req.json();
     const userEmail = body.email;
     console.log("body", body);
@@ -62,20 +62,20 @@ export const POST = async (req) => {
   }
 };
 
-
 // =====================================================
 
 export const PUT = async (req) => {
   try {
-    await dbConfig();
     const body = await req.json();
     const newPassword = body.password;
     const reset_token = body.token;
     console.log("body", body);
+    console.log('=====================================')
     console.log("newPassword", newPassword);
     console.log("reset_token", reset_token);
 
-    const hashedPassword = bcrypt.hash(newPassword, 10);
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    console.log('=====================================')
     console.log("hashedPassword", hashedPassword);
 
     const userFound = await userModel.findOne({
@@ -103,61 +103,3 @@ export const PUT = async (req) => {
     return NextResponse.json({ message: "Something error in PUT" });
   }
 };
-
-// =====================================================
-
-// export const PUT = async (req) => {
-//   try {
-// let body = await req.json();
-// console.log("body", body);
-// let newPassword = body.password;
-// let reset_token = body.token;
-// console.log("newPassword", newPassword);
-// console.log("reset_token", reset_token);
-
-//     if (!newPassword) {
-//       throw new Error("please provide valid new password");
-//     }
-
-//     if (!reset_token) {
-//       throw new Error("reset token required please proceed again");
-//     }
-
-//     const hashedPassword = await bcrypt.hash(newPassword, 10);
-
-//     const userFound = await userModel.findOne({
-//       reset_token,
-//       reset_token_expiration: { $gt: Date.now() },
-//     });
-
-//     console.log("userFound", userFound);
-
-//     if (!userFound) {
-//       throw new Error("User not found");
-//     }
-//     if (!hashedPassword) {
-//       throw new Error("Something went wrong in password");
-//     }
-
-// let changePassword = await userModel.updateOne(
-//   { reset_token },
-//   {
-//     $set: {
-//       password: hashedPassword,
-//       reset_token: "",
-//       reset_token_expiration: "",
-//     },
-//   }
-// );
-
-// console.log(changePassword);
-// if (!changePassword) {
-//   throw new Error("Something went wrong");
-// }
-
-//     return NextResponse.json({ message: "password has been updated" });
-//   } catch (error) {
-//     console.log("Error", error);
-//     return NextResponse.json({ message: "Something went wrong" });
-//   }
-// };

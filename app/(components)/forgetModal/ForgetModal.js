@@ -4,36 +4,45 @@ import { useState } from "react";
 export default function ForgetModal() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+    try {
+      if (!email) {
+        setError("please provide valid email");
+        return
+      }
+      const myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
 
-    const raw = JSON.stringify({
-      email: email,
-    });
+      const raw = JSON.stringify({
+        email: email,
+      });
 
-    const requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-      redirect: "follow",
-    };
+      const requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow",
+      };
 
-    fetch("http://localhost:3000/api/forgetpassword", requestOptions)
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.error(error));
+      fetch("http://localhost:3000/api/forgetpassword", requestOptions)
+        .then((response) => response.text())
+        .then((result) => console.log(result))
+        .catch((error) => console.error(error));
+
+      setIsModalOpen(false);
+
+    } catch (error) {
+      console.log("error", error);
+    }
   };
 
   const openModal = () => {
     setIsModalOpen(true);
   };
   const closeModal = () => {
-    setIsModalOpen(false);
-  };
-  const saveModal = () => {
     setIsModalOpen(false);
   };
 
@@ -76,6 +85,7 @@ export default function ForgetModal() {
                     onChange={(e) => setEmail(e.target.value)}
                     className="block w-full mb-4 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                   />
+                  {error && <span className="text-red-600">{error}</span>}
                 </div>
               </div>
               <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">

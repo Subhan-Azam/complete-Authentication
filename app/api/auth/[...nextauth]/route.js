@@ -12,6 +12,8 @@ export const authOptions = {
 
       async authorize(credentials) {
         const { email, password } = credentials;
+        console.log("email", email);
+        console.log("password", password);
         try {
           await dbConfig();
           const user = await userModel.findOne({ email });

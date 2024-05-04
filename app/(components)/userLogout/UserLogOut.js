@@ -4,6 +4,7 @@ import { signOut, useSession } from "next-auth/react";
 export default function UserLogOut() {
   const { data: session } = useSession();
 
+
   return (
     <div className="grid place-items-center h-screen">
       <div className="w-96 shadow-2xl bg-zinc-300/50 rounded-lg px-7 py-8 space-y-4">
@@ -17,10 +18,16 @@ export default function UserLogOut() {
         <div>
           <button
             onClick={() => signOut()}
-            className="w-full py-2 text-lg font-semibold rounded-lg text-white bg-red-600"
+            className="mb-3 w-full py-2 text-lg font-semibold rounded-lg text-white bg-red-600"
           >
             LogOut
           </button>
+          {/* <button
+            onClick={() => signOut()}
+            className="w-full py-2 text-lg font-semibold rounded-lg text-white bg-red-600"
+          >
+            Delete Account
+          </button> */}
         </div>
       </div>
     </div>
