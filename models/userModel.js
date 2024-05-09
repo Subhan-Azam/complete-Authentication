@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema({
+export const userSchema = new mongoose.Schema({
   name: {
     type: String,
     require: [true, "Please provide user name"],
@@ -34,5 +34,4 @@ const userSchema = new mongoose.Schema({
   // verifyTokenExpiry: Date,
 });
 
-export default mongoose.models.userAuth ||
-  mongoose.model("userAuth", userSchema);
+export default mongoose.models.userAuth || mongoose.model("userAuth", userSchema);

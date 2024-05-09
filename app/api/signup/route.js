@@ -7,15 +7,11 @@ export async function POST(req) {
   try {
     await dbConfig();
     const { name, email, password } = await req.json();
-   const hashPass = await bcrypt.hash(password, 10);
+    const hashPass = await bcrypt.hash(password, 10);
 
     await userModel.create({ name, email, password: hashPass });
-    await userModel.deleteOne({email})
 
-    return NextResponse.json(
-      { message: "POST Successfully working" },
-      { status: 201 }
-    );
+    return NextResponse.json({ message: "POST Successfully working" });
   } catch (error) {
     return NextResponse.json({ message: "Something wrong in POST" });
   }

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
 import { faEyeSlash } from "@fortawesome/free-regular-svg-icons";
-// import Loader from "../loader/Loader";
+import Loader from "../loader/Loader";
 
 export default function UserSignUp() {
   const [name, setName] = useState("");
@@ -14,8 +14,7 @@ export default function UserSignUp() {
   const [password, setPassword] = useState("");
   const [visiblePass, setVisiblePass] = useState(true);
   const [error, setError] = useState("");
-  // const [loader, setLoader] = useState(false);
-
+  const [loader, setLoader] = useState(false);
   const router = useRouter();
 
   const validateEmail = (email) => {
@@ -25,7 +24,7 @@ export default function UserSignUp() {
 
   const signUpHandler = async (e) => {
     e.preventDefault();
-    // setLoader(true);
+    setLoader(true);
 
     if (!name || !email || !password) {
       setError("All fields are necessary");
@@ -41,23 +40,6 @@ export default function UserSignUp() {
     }
 
     try {
-      // const myHeaders = new Headers();
-      // myHeaders.append("Content-Type", "application/json");
-
-      // const raw = JSON.stringify({
-      //   name: name,
-      //   email: email,
-      //   password: password,
-      // });
-
-      // const requestOptions = {
-      //   method: "POST",
-      //   headers: myHeaders,
-      //   body: raw,
-      // };
-
-      // await fetch("http://localhost:3000/api/signup", requestOptions);
-
       const myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
 
@@ -71,13 +53,9 @@ export default function UserSignUp() {
         method: "POST",
         headers: myHeaders,
         body: raw,
-        redirect: "follow",
       };
 
-      fetch("http://localhost:3000/api/signup", requestOptions)
-        .then((response) => response.text())
-        .then((result) => console.log(result))
-        .catch((error) => console.error(error));
+      await fetch("http://localhost:3000/api/signup", requestOptions);
     } catch (error) {
       console.log(error);
     } finally {
@@ -86,13 +64,13 @@ export default function UserSignUp() {
       setPassword("");
       alert("Data saved");
       router.push("/");
-      // setLoader(false);
+      setLoader(false);
     }
   };
 
   return (
     <>
-      {/* {loader && <Loader />} */}
+      {loader && <Loader />}
       <div className="grid place-items-center h-screen">
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 shadow-2xl rounded-xl h-auto max-w-[400px] w-full p-7 border-t-4 bg-zinc-300/10 border-green-500">
           <h1 className="font-bold text-2xl">User SignUp</h1>
