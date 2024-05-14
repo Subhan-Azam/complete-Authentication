@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
 import { faEyeSlash } from "@fortawesome/free-regular-svg-icons";
-// import Loader from "../loader/Loader";
 
 export default function UserSignUp() {
   const [name, setName] = useState("");
@@ -41,23 +40,6 @@ export default function UserSignUp() {
     }
 
     try {
-      // const myHeaders = new Headers();
-      // myHeaders.append("Content-Type", "application/json");
-
-      // const raw = JSON.stringify({
-      //   name: name,
-      //   email: email,
-      //   password: password,
-      // });
-
-      // const requestOptions = {
-      //   method: "POST",
-      //   headers: myHeaders,
-      //   body: raw,
-      // };
-
-      // await fetch("http://localhost:3000/api/signup", requestOptions);
-
       const myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
 
