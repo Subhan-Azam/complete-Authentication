@@ -7,21 +7,17 @@ import ForgetModal from "../forgetModal/ForgetModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
 import { faEyeSlash } from "@fortawesome/free-regular-svg-icons";
-// import Loader from "../loader/Loader";
 
 export default function UserLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [visiblePass, setVisiblePass] = useState(true);
   const [error, setError] = useState("");
-  // const [loader, setLoader] = useState(false);
-
   const router = useRouter();
 
   const LoginHandler = async (e) => {
     e.preventDefault();
     try {
-      // setLoader(true);
       const res = await signIn("credentials", {
         email,
         password,
@@ -32,17 +28,15 @@ export default function UserLogin() {
         return;
       }
       router.replace("logout");
-      // setLoader(false);
     } catch (error) {
       console.log("error", error);
-    } 
+    }
   };
 
   return (
     <>
-      {/* {loader && <Loader />} */}
       <div className="grid place-items-center h-screen">
-        <div className=" shadow-2xl rounded-xl h-auto max-w-[400px] w-full p-7 border-t-4 bg-zinc-300/10 border-green-500">
+        <div className="shadow-2xl rounded-xl h-auto max-w-[400px] w-full p-7 border-t-4 bg-zinc-300/10 border-green-500">
           <h1 className="font-bold text-2xl">UserLogin</h1>
           <form className="flex flex-col gap-6 my-4">
             <input

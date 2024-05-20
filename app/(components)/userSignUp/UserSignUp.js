@@ -24,7 +24,6 @@ export default function UserSignUp() {
 
   const signUpHandler = async (e) => {
     e.preventDefault();
-    // setLoader(true);
 
     if (!name || !email || !password) {
       setError("All fields are necessary");
@@ -68,13 +67,11 @@ export default function UserSignUp() {
       setPassword("");
       alert("Data saved");
       router.push("/");
-      // setLoader(false);
     }
   };
 
   return (
     <>
-      {/* {loader && <Loader />} */}
       <div className="grid place-items-center h-screen">
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 shadow-2xl rounded-xl h-auto max-w-[400px] w-full p-7 border-t-4 bg-zinc-300/10 border-green-500">
           <h1 className="font-bold text-2xl">User SignUp</h1>

@@ -5,9 +5,9 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 export default function page() {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [password, setPassword] = useState("");
-
+  
+  const searchParams = useSearchParams();
   const token = searchParams.get("token");
 
   async function changepass(e) {

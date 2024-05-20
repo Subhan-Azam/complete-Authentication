@@ -41,7 +41,7 @@ export const POST = async (req) => {
     });
     console.log("transporter result", transporter);
 
-    const resetLink = `${process.env.NEXTAUTH_URL}/resetpassword/?token=${resetToken}`;
+    const resetLink = `${process.env.NEXTAUTH_URL}/resetpassword/?token123=${resetToken}`;
     console.log("resetLink", resetLink);
 
     const mailOptions = {
@@ -56,11 +56,14 @@ export const POST = async (req) => {
     const sendMail = await transporter.sendMail(mailOptions);
     console.log("sendMail", sendMail);
 
+    
+
     return NextResponse.json({ message: "Forget Post working" });
   } catch (error) {
     return NextResponse.json({ message: "Something error" });
   }
 };
+
 
 // =====================================================
 
@@ -69,10 +72,9 @@ export const PUT = async (req) => {
     const body = await req.json();
     const newPassword = body.password;
     const reset_token = body.token;
-    console.log("body", body);
-    console.log('=====================================')
-    console.log("newPassword", newPassword);
-    console.log("reset_token", reset_token);
+    console.log("body=====", body);
+    console.log("newPassword=====", newPassword);
+    console.log("reset_token=====", reset_token);
 
     const hashedPassword = await bcrypt.hash(newPassword, 10);
     console.log('=====================================')

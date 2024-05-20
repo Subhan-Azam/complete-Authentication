@@ -17,7 +17,7 @@ export const authOptions = {
         try {
           await dbConfig();
           const user = await userModel.findOne({ email });
-
+          
           if (!user) {
             return null;
           }
@@ -35,23 +35,6 @@ export const authOptions = {
       },
     }),
   ],
-
-  // callbacks: {
-  //   session: async ({ session, token }) => {
-  //     if (session?.user) {
-  //       session.user.id = token.sub;
-  //     }
-  //     console.log("session", session);
-  //     return session;
-  //   },
-  //   jwt: async ({ user, token }) => {
-  //     if (user) {
-  //       token.uid = user.id;
-  //     }
-  //     console.log("token :>> ", token);
-  //     return token;
-  //   },
-  // },
 
   session: {
     strategy: "jwt",
